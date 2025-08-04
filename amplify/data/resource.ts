@@ -12,6 +12,48 @@ const schema = a.schema({
       content: a.string(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
+  
+  Booking: a
+    .model({
+      property: a.string().required(),
+      checkInDate: a.string().required(),
+      checkOutDate: a.string().required(),
+      guestName: a.string().required(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+  
+  Guest: a
+    .model({
+      name: a.string().required(),
+      lastname: a.string().required(),
+      country: a.string().required(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+  
+  Property: a
+    .model({
+      address: a.string().required(),
+      capacity: a.integer().required(),
+      type: a.string().required(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+  
+  StockItem: a
+    .model({
+      item: a.string().required(),
+      quantity: a.integer().required(),
+      repositionQuantity: a.integer().required(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+  
+  InventoryRevision: a
+    .model({
+      stockItemId: a.string().required(),
+      itemName: a.string().required(),
+      availableQuantity: a.integer().required(),
+      revisionDate: a.string().required(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
